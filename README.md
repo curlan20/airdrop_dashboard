@@ -1,5 +1,4 @@
-
-This project is a fork of [ReactAnt](https://github.com/SudeepTimalsina/ReactAnt) from [SudeepTimalsina](https://github.com/SudeepTimalsina) with latest packages and Cypress/Cucumber added.
+You can use this boilerplate to build great cross-chain dApps using [Moralis](http://moralis.io/) development platform.
 
 ## Available Scripts
 
@@ -16,11 +15,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
-
-### `npm run server`
-
-To run your json server.
-Open [http://localhost:5000](http://localhost:5000) to view it in the browser.
 
 ### `npm run cypress`
 
