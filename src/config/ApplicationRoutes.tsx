@@ -1,21 +1,25 @@
 import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import Login from "../components/pages/login";
 import List from "../components/pages/list";
 import Form from "../components/pages/form";
 import SideNav from "../components/layouts/sidebar";
 import File from "../components/pages/files";
 import Videos from "../components/pages/videos";
 
-import { Layout } from 'antd';
+import { Layout, Button } from 'antd';
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined
   } from '@ant-design/icons';
+import {useMoralis} from "react-moralis";
 
 const { Header, Sider, Content} = Layout;
 
 
 const ApplicationRoutes = () => {
+  const { logout } = useMoralis();
+
   const [collapse, setCollapse] = useState(false);
 
   useEffect(() => {
@@ -39,9 +43,11 @@ const ApplicationRoutes = () => {
                           onClick: handleToggle,
                           style: {color: "#fff"}
                       })}
+              <Button onClick={() => logout()}>Logout</Button>
             </Header>
               <Content style={{margin: '24px 16px', padding: 24, minHeight: "calc(100vh - 114px)", background: "#fff"}}>
                 <Switch>
+                    <Route path="/login" component={Login} />
                     <Route path="/list" component={List} />
                     <Route path="/form" component={Form} />
                     <Route path="/files" component={File} />
