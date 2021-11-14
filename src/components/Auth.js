@@ -106,18 +106,19 @@ export const Auth = () => {
             />
           )}
           <div style={{textAlign: "right"}}>
-          <Button type="primary" isLoading={isAuthenticating} onClick={() => authenticate()}>
-            Authenticate via Metamask
-          </Button>
+            <Button type="primary" isLoading={isAuthenticating} onClick={() => authenticate()}>
+              Authenticate via Metamask
+            </Button>
+            <p>
+              <em>or</em>
+            </p>
+
+            <SignUp/>
+            <p>
+              <em>or</em>
+            </p>
+            <Login/>
           </div>
-          <p>
-            <em>or</em>
-          </p>
-          <SignUp/>
-          <p>
-            <em>or</em>
-          </p>
-          <Login/>
         </Col>
       </Row>
     </div>

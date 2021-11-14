@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import Login from "../components/pages/login";
+import Dirtix from "../components/pages/dirtix";
 import List from "../components/pages/list";
 import Form from "../components/pages/form";
 import SideNav from "../components/layouts/sidebar";
@@ -48,6 +49,7 @@ const ApplicationRoutes = () => {
               <Content style={{margin: '24px 16px', padding: 24, minHeight: "calc(100vh - 114px)", background: "#fff"}}>
                 <Switch>
                     <Route path="/login" component={Login} />
+                    <Route path="/dirtix" component={Dirtix} />
                     <Route path="/list" component={List} />
                     <Route path="/form" component={Form} />
                     <Route path="/files" component={File} />
