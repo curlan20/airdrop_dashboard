@@ -2,7 +2,9 @@ import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import Login from "../components/pages/login";
 import Dirtix from "../components/pages/dirtix";
-import List from "../components/pages/list";
+import Tokens from "../components/pages/tokens";
+import Airdrop from "../components/pages/airdrop";
+import Users from "../components/pages/users";
 import Form from "../components/pages/form";
 import SideNav from "../components/layouts/sidebar";
 import File from "../components/pages/files";
@@ -50,11 +52,13 @@ const ApplicationRoutes = () => {
                 <Switch>
                     <Route path="/login" component={Login} />
                     <Route path="/dirtix" component={Dirtix} />
-                    <Route path="/list" component={List} />
+                    <Route path="/tokens" component={Tokens} />
+                    <Route path="/airdrop" component={Airdrop} />
+                    <Route path="/users" component={Users} />
                     <Route path="/form" component={Form} />
                     <Route path="/files" component={File} />
                     <Route path="/videos" component={Videos} />
-                    <Redirect to="/list" from="/" />
+                    <Redirect to="/users" from="/" />
                 </Switch>
               </Content>
           </Layout>

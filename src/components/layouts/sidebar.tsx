@@ -4,6 +4,8 @@ import {
   UserOutlined,
   VideoCameraOutlined,
   UploadOutlined,
+  AimOutlined,
+  BarsOutlined,
 } from '@ant-design/icons';
 import {useHistory} from 'react-router';
 
@@ -11,7 +13,7 @@ const SideNav = () => {
   const history = useHistory();
 
   const handleUserClick = () => {
-    history.push('/list');
+    history.push('/users');
   }
 
   const handleVideosClick = () => {
@@ -20,6 +22,14 @@ const SideNav = () => {
 
   const handleFileClick = () => {
     history.push('/files');
+  }
+
+  const handleTokensClick = () => {
+    history.push('/tokens');
+  }
+
+  const handleAirdropClick = () => {
+    history.push('/airdrop');
   }
 
   return (
@@ -37,6 +47,14 @@ const SideNav = () => {
         <Menu.Item key="3" onClick={handleFileClick}>
           <UploadOutlined/>
           <span> Files</span>
+        </Menu.Item>
+        <Menu.Item key="4" onClick={handleTokensClick}>
+          <BarsOutlined />
+          <span>Tokens</span>
+        </Menu.Item>
+        <Menu.Item key="5" onClick={handleAirdropClick}>
+          <AimOutlined />
+          <span>Airdrop</span>
         </Menu.Item>
       </Menu>
     </div>
