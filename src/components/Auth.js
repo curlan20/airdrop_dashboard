@@ -9,6 +9,7 @@ import {
   Row,
   Typography, Form
 } from 'antd';
+import RandomGif from "./RandomGif";
 
 const {Title} = Typography;
 
@@ -87,17 +88,23 @@ export const Auth = () => {
   const {authenticate, isAuthenticating, authError} = useMoralis();
 
   return (
-    <div>
+    <div style={{height: "100vh"}}>
       <Row gutter={[40, 0]}>
-        <Col span={23}>
+        <Col span={24}>
           <Title style={{textAlign: 'center'}} level={2}>
-            Please Fill the User Form
+            Want some free J4IT tokens?
           </Title>
         </Col>
       </Row>
-
+      <Row>
+        <Col span={24}>
+          <div style={{textAlign: 'center'}}>
+            <img src={'https://media.giphy.com/media/l0HFkA6omUyjVYqw8/giphy.gif'} />
+          </div>
+        </Col>
+      </Row>
       <Row gutter={[40, 0]}>
-        <Col span={18}>
+        <Col span={24}>
           {authError && (
             <Alert
               type="error"
@@ -105,19 +112,10 @@ export const Auth = () => {
               closable
             />
           )}
-          <div style={{textAlign: "right"}}>
+          <div style={{textAlign: "center", paddingTop: '2rem'}}>
             <Button type="primary" isLoading={isAuthenticating} onClick={() => authenticate()}>
-              Authenticate via Metamask
+              Connect your wallet
             </Button>
-            <p>
-              <em>or</em>
-            </p>
-
-            <SignUp/>
-            <p>
-              <em>or</em>
-            </p>
-            <Login/>
           </div>
         </Col>
       </Row>
