@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Button, Row, Col, Form, Input, Checkbox, Result} from "antd";
 import {useMoralis} from "react-moralis";
-import RandomGif from "../RandomGif";
 
 const dirtixContract = "0x1155bfF43e0eB873651d851bc46A22d9CFF9B385";
 const myAccount = process.env.REACT_APP_MY_ACCOUNT;
