@@ -1,22 +1,25 @@
 import React, {useState, useEffect} from "react";
 import {Row, Col, Table, Typography} from "antd";
 import {Moralis} from "moralis";
+import {useMoralis} from "react-moralis";
 
 const {Title} = Typography;
 
-const myAccount = process.env.REACT_APP_MY_ACCOUNT;
-
 function Tokens() {
   const [tokenBalances, setTokenBalances] = useState();
+  const {user} = useMoralis();
 
   useEffect(() => {
-    const options = {chain: "bsc", address: myAccount};
-    // @ts-ignore
-    Moralis.Web3API.account.getTokenBalances(options)
-      .then((b: any) => {
-        setTokenBalances(b)
-      })
-  }, [])
+    if (user) {
+      const ethAddress = user.get('ethAddress');
+      const options = {chain: "bsc", address: ethAddress};
+
+      // @ts-ignore
+      Moralis.Web3API.account.getTokenBalances(options).then((b: any) => {
+          setTokenBalances(b)
+        });
+    }}
+  , [])
 
 
   const columns = [
@@ -50,7 +53,7 @@ function Tokens() {
   return (
     <div>
       <Row gutter={[40, 0]}>
-        <Col span={18}>
+        <Col span={18} xs={24}>
           <Title level={2}>
             Tokens List
           </Title>

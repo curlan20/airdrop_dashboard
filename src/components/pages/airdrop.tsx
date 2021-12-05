@@ -13,7 +13,7 @@ function Airdrop() {
   const [mallorcaClub, setMallorcaClub] = useState(false);
 
   useEffect(()=> {
-    refetchUserData()
+    refetchUserData();
   } ,[])
 
   const handleGiveMe = () => {
@@ -30,12 +30,13 @@ function Airdrop() {
   }
 
   if (user && !user.get('airdropStatus')) {
+    console.log(user.get('ethAddress'))
     console.log(user.get('airdropStatus'))
     return (
       <div>
         <Row>
-          <Col span={10} offset={8}>
-            <Form {...layout} style={{marginTop: "4rem"}}>
+          <Col span={10} xs={24}>
+            <Form {...layout} style={{marginTop: "2rem"}}>
               <Form.Item name="email"
                  rules={[
                    {
