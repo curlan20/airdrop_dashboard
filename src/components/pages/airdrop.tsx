@@ -2,10 +2,6 @@ import React, {useEffect, useState} from "react";
 import {Button, Row, Col, Form, Input, Checkbox, Result} from "antd";
 import {useMoralis} from "react-moralis";
 
-const dirtixContract = "0x1155bfF43e0eB873651d851bc46A22d9CFF9B385";
-const myAccount = process.env.REACT_APP_MY_ACCOUNT;
-const mySecondary = "0x2C0A43e194e46a50F0f125fdfD404cB4b162dE17";
-
 const layout = {
   labelCol: {span: 8},
   wrapperCol: {span: 16},
@@ -60,7 +56,7 @@ function Airdrop() {
               </Form.Item>
               <Form.Item name="mallorcaClub">
                 <Button type={"primary"} onClick={handleGiveMe} disabled={!email}>
-                  Give me {mallorcaClub ? 100 : 10} tokens
+                  Give me {mallorcaClub ? 1000 : 10} tokens
                 </Button>
               </Form.Item>
             </Form>
