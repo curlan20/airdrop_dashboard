@@ -1,9 +1,13 @@
-Moralis.Cloud.afterSave("User", function (request) {
-  Moralis.Cloud.sendEmail({
-    to: 'pbrudny@gmail.com',
-    subject: `User ${request.object.notificationEmail} has signed in`,
-    html: "Awesome. One more!"
-  });
+Moralis.Cloud.beforeSave("User", async (request) => {
+  const email = request.object.get('notificationEmail')
+
+  if (email) {
+    Moralis.Cloud.sendEmail({
+      to: 'pbrudny@gmail.com',
+      subject: `User ${email} has set notification email`,
+      html: "Awesome. One more!"
+    });
+  }
 });
 
 Moralis.Cloud.define("userApplied", function (request) {
