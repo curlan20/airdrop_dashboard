@@ -1,7 +1,7 @@
-Moralis.Cloud.define("userRegistered", function (request) {
+Moralis.Cloud.afterSave("User", function (request) {
   Moralis.Cloud.sendEmail({
     to: 'pbrudny@gmail.com',
-    subject: `User ${request.params.userEmail} has signed in`,
+    subject: `User ${request.object.notificationEmail} has signed in`,
     html: "Awesome. One more!"
   });
 });

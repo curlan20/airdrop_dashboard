@@ -5,7 +5,7 @@ import {Auth} from "./components/Auth";
 import {Layout} from "antd";
 
 function App() {
-  const {isAuthenticated} = useMoralis();
+  const {isAuthenticated, user} = useMoralis();
 
   if (isAuthenticated) {
     return (
