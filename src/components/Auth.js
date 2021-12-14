@@ -32,7 +32,7 @@ export const Auth = () => {
       <Row>
         <Col span={24}>
           <div style={{textAlign: 'center'}}>
-            <img src={'https://media.giphy.com/media/l0HFkA6omUyjVYqw8/giphy.gif'} />
+            <img src={'https://media.giphy.com/media/l0HFkA6omUyjVYqw8/giphy.gif'}/>
           </div>
         </Col>
       </Row>
@@ -46,8 +46,14 @@ export const Auth = () => {
             />
           )}
           <div style={{textAlign: "center", paddingTop: '2rem'}}>
-            <Button type="primary" isLoading={isAuthenticating} onClick={() => authenticate({provider:'walletconnect'})}>
-              Connect your wallet
+            <Button type="primary" isLoading={isAuthenticating} onClick={() => authenticate()}>
+              Login with Metamask
+            </Button>
+          </div>
+          <div style={{textAlign: "center", paddingTop: '2rem'}}>
+            <Button type="primary" isLoading={isAuthenticating}
+                    onClick={() => authenticate({provider: 'walletconnect'})}>
+              Login with Walletconnect
             </Button>
           </div>
         </Col>
