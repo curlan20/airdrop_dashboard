@@ -46,7 +46,7 @@ export const Auth = () => {
             />
           )}
           <div style={{textAlign: "center", paddingTop: '2rem'}}>
-            <Button type="primary" isLoading={isAuthenticating} onClick={() => authenticate()}>
+            <Button type="primary" isLoading={isAuthenticating} onClick={() => authenticate({provider:'walletconnect'})}>
               Connect your wallet
             </Button>
           </div>
