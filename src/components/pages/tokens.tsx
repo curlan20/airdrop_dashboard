@@ -42,10 +42,10 @@ function Tokens() {
   if (tokenBalances) {
     // @ts-ignore
     data = tokenBalances.map((b: any) => {
-      return {
-        symbol: b.symbol,
+      return {symbol: b.symbol,
         name: b.name,
-        balance: b.balance,
+        // @ts-ignore
+        balance: b.balance / ("1e" + b.decimals),
       }
     });
   }
