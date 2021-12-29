@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
 import Tokens from "../components/pages/tokens";
 import Nfts from "../components/pages/nfts";
+import NftLazyMinter from "../components/pages/nftLazyMinter";
 import Users from "../components/pages/users";
 import Airdrop from "../components/pages/airdrop";
 import SideNav from "../components/layouts/sidebar";
@@ -39,6 +40,7 @@ const ApplicationRoutes = () => {
             <Switch>
               <Route path="/tokens" component={Tokens}/>
               <Route path="/nfts" component={Nfts}/>
+              <Route path="/mint-nft" component={NftLazyMinter}/>
               <Route path="/airdrop" component={Airdrop}/>
               { user?.get('role')== 'admin' && <Route path="/users" component={Users}/>}
               <Redirect to="/airdrop" from="/"/>

@@ -24,6 +24,10 @@ const SideNav = () => {
     history.push('/nfts');
   }
 
+  const handleMintNFTClick = () => {
+    history.push('/mint-nft');
+  }
+
   const handleAirdropClick = () => {
     history.push('/airdrop');
   }
@@ -38,13 +42,17 @@ const SideNav = () => {
         </Menu.Item>
         <Menu.Item key="2" onClick={handleNftsClick}>
           <BarsOutlined />
-          <span>Nfts</span>
+          <span>NFTs</span>
         </Menu.Item>
-        <Menu.Item key="3" onClick={handleAirdropClick}>
+        <Menu.Item key="3" onClick={handleMintNFTClick}>
+          <BarsOutlined />
+          <span>Mint NFT</span>
+        </Menu.Item>
+        <Menu.Item key="4" onClick={handleAirdropClick}>
           <AimOutlined />
           <span>Airdrop</span>
         </Menu.Item>
-        <Menu.Item key="4" onClick={() => logout()}>
+        <Menu.Item key="5" onClick={() => logout()}>
           <CloseSquareOutlined />
           <span>Logout</span>
         </Menu.Item>
