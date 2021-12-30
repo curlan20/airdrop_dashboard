@@ -35,7 +35,7 @@ const SideNav = () => {
   return (
     <div>
       <div style={{height: "32px", margin: "16px"}}></div>
-      <Menu theme="dark" mode="inline" defaultSelectedKeys={['2']}>
+      <Menu theme="dark" mode="inline" >
         <Menu.Item key="1" onClick={handleTokensClick}>
           <BarsOutlined />
           <span>Tokens</span>

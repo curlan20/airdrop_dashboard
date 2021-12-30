@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import {
   Row,
   Col,
@@ -10,11 +10,10 @@ import {
   message
 } from "antd";
 
-import { UploadOutlined } from '@ant-design/icons';
+import {UploadOutlined} from '@ant-design/icons';
 
 import {Moralis} from "moralis";
-import {useMoralis, useMoralisWeb3Api} from "react-moralis";
-import axios from "axios";
+import {useMoralis} from "react-moralis";
 
 const {Title} = Typography;
 const layout = {
@@ -23,30 +22,75 @@ const layout = {
 };
 
 function NftLazyMinter() {
-  const Web3Api = useMoralisWeb3Api();
-
   const [nftName, setNftName] = useState();
   const [nftDescription, setNftDescription] = useState();
-  const [imageFile, setImageFile] = useState();
+  const [imageData, setImageData] = useState();
+  const [mintedResult, setMintedResult] = useState();
   const {user} = useMoralis();
+  // @ts-ignore
+  Moralis.enableWeb3()
 
-  function handleSubmit() {
+  async function handleSubmit() {
+    if (imageData) {
+      // @ts-ignore
+      const imageFile = new Moralis.File(imageData.name, imageData)
+      await imageFile.saveIPFS();
+      // @ts-ignore
+      let imageHash = imageFile.hash();
 
+      let metadata = {
+        name: nftName,
+        description: nftDescription,
+        image: "/ipfs/" + imageHash
+      }
+      console.log(metadata);
+      const jsonFile = new Moralis.File("metadata.json", {base64: btoa(JSON.stringify(metadata))});
+      await jsonFile.saveIPFS();
+
+      // @ts-ignore
+      let metadataHash = jsonFile.hash();
+      // @ts-ignore
+      console.log(jsonFile.ipfs())
+      let res = await Moralis.Plugins.rarible.lazyMint({
+        chain: 'rinkeby',
+        // @ts-ignore
+        userAddress: user.get('ethAddress'),
+        tokenType: 'ERC721',
+        tokenUri: 'ipfs://' + metadataHash,
+        royaltiesAmount: 5, // 0.05% royalty. Optional
+      })
+      console.log(res);
+      setMintedResult(res.data.result);
+    } else {
+      return null
+    }
   }
 
-  const uploadProps = {
-    onChange(info: any) {
-      if (info.file.status !== 'uploading') {
-        console.log(info.file, info.fileList);
-      }
-      if (info.file.status === 'done') {
-        setImageFile(info)
-        message.success(`${info.file.name} file uploaded successfully`);
-      } else if (info.file.status === 'error') {
-        message.error(`${info.file.name} file upload failed.`);
-      }
-    },
+  function handleUpload(file: any, fileList: any) {
+    console.log("file: ", file);
+    setImageData(file);
+  }
+
+  function dummyRequest(params: any) {
+    const {file, onSuccess} = params;
+    setTimeout(() => {
+      onSuccess("ok");
+    }, 0);
   };
+
+  if (mintedResult) {
+    // @ts-ignore
+    console.log(`https://rinkeby.rarible.com/token/${mintedResult.tokenAddress}:${mintedResult.tokenId}`)
+
+    return (
+      <h2>NFT minted -
+        <a
+          // @ts-ignore
+          href={ `https://rinkeby.rarible.com/token/${mintedResult.tokenAddress}:${mintedResult.tokenId}` }
+        >{" "} View NFT</a>
+      </h2>
+    )
+  }
 
   return (
     <Row>
@@ -61,24 +105,31 @@ function NftLazyMinter() {
                        }
                      ]}
           >
-            <Input placeholder="NFT name" value={nftName} onChange={(event: any) => setNftName(event.currentTarget.value)}/>
+            <Input placeholder="NFT name" value={nftName}
+                   onChange={(event: any) => setNftName(event.currentTarget.value)}/>
           </Form.Item>
-          <Form.Item name="nft-description"
-                     rules={[
-                       {
-                         required: true,
-                         message: 'Please input nft description',
-                         type: 'string'
-                       }
-                     ]}
+          <Form.Item
+            name="nft-description"
+            rules={[
+              {
+                required: true,
+                message: 'Please input nft description',
+                type: 'string'
+              }
+            ]}
           >
-            <Input placeholder="NFT description" value={nftDescription} onChange={(event: any) => setNftDescription(event.currentTarget.value)}/>
+            <Input placeholder="NFT description" value={nftDescription}
+                   onChange={(event: any) => setNftDescription(event.currentTarget.value)}/>
           </Form.Item>
 
           <Form.Item name="nft-file"
           >
-            <Upload {...uploadProps}>
-              <Button icon={<UploadOutlined />}>Click to Upload</Button>
+            <Upload
+              beforeUpload={handleUpload}
+              customRequest={dummyRequest}
+              maxCount={1}
+            >
+              <Button icon={<UploadOutlined/>}>Click to Upload</Button>
             </Upload>
           </Form.Item>
 
@@ -90,6 +141,7 @@ function NftLazyMinter() {
         </Form>
       </Col>
     </Row>
+
 
   )
 }
