@@ -1,5 +1,17 @@
 import React, {useState, useEffect} from "react";
-import {Row, Col, Table, Typography, Form, Input, Checkbox, Button} from "antd";
+import {
+  Row,
+  Col,
+  Typography,
+  Form,
+  Input,
+  Upload,
+  Button,
+  message
+} from "antd";
+
+import { UploadOutlined } from '@ant-design/icons';
+
 import {Moralis} from "moralis";
 import {useMoralis, useMoralisWeb3Api} from "react-moralis";
 import axios from "axios";
@@ -15,11 +27,26 @@ function NftLazyMinter() {
 
   const [nftName, setNftName] = useState();
   const [nftDescription, setNftDescription] = useState();
+  const [imageFile, setImageFile] = useState();
   const {user} = useMoralis();
 
   function handleSubmit() {
 
   }
+
+  const uploadProps = {
+    onChange(info: any) {
+      if (info.file.status !== 'uploading') {
+        console.log(info.file, info.fileList);
+      }
+      if (info.file.status === 'done') {
+        setImageFile(info)
+        message.success(`${info.file.name} file uploaded successfully`);
+      } else if (info.file.status === 'error') {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
+  };
 
   return (
     <Row>
@@ -50,8 +77,9 @@ function NftLazyMinter() {
 
           <Form.Item name="nft-file"
           >
-            {/*//TODO file upload*/}
-            <Input placeholder="NFT file" value={nftDescription} onChange={(event: any) => setNftDescription(event.currentTarget.value)}/>
+            <Upload {...uploadProps}>
+              <Button icon={<UploadOutlined />}>Click to Upload</Button>
+            </Upload>
           </Form.Item>
 
           <Form.Item>
