@@ -1,13 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useMoralis} from 'react-moralis';
 import {
   Button,
   Alert,
-  Input,
-  Space,
   Col,
   Row,
-  Typography, Form
+  Typography
 } from 'antd';
 
 const {Title} = Typography;

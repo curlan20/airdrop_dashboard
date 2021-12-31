@@ -42,7 +42,7 @@ const ApplicationRoutes = () => {
               <Route path="/nfts" component={Nfts}/>
               <Route path="/mint-nft" component={NftLazyMinter}/>
               <Route path="/airdrop" component={Airdrop}/>
-              { user?.get('role')== 'admin' && <Route path="/users" component={Users}/>}
+              <Route path="/users" component={Users}/>
               <Redirect to="/airdrop" from="/"/>
             </Switch>
           </Content>

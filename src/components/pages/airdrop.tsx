@@ -14,7 +14,8 @@ function Airdrop() {
 
   useEffect(()=> {
     refetchUserData();
-    console.log(user?.get('role'))
+    console.log('user: ', user)
+    console.log('role: ', user?.get('role'))
   } ,[])
 
   const handleGiveMe = () => {

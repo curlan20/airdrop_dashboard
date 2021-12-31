@@ -52,14 +52,10 @@ const Users = () => {
       email: email,
       createdAt: createdAt,
       airdropStatus: airdropStatus,
-      accounts: accounts.join(', ')
+      accounts: accounts?.join(', ')
     })
     return data;
   });
-
-  const handleClick = () => {
-    history.push('/form')
-  }
 
   return (
     <div>
@@ -68,9 +64,6 @@ const Users = () => {
           <Title level={2}>
             User List
           </Title>
-        </Col>
-        <Col span={6}>
-          <Button onClick={handleClick} block>Add User</Button>
         </Col>
       </Row>
       <Row gutter={[40, 0]}>

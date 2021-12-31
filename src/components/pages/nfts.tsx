@@ -32,19 +32,19 @@ function Nfts() {
 
   const columns = [
     {
-      title: 'NFT name',
+      title: 'Name',
       dataIndex: 'nftName',
     },
     {
-      title: 'Token Address',
+      title: 'Address',
       dataIndex: 'tokenAddress'
     },
     {
-      title: 'Token ID',
+      title: 'ID',
       dataIndex: 'tokenId'
     },
     {
-      title: 'Contract Type',
+      title: 'Type',
       dataIndex: 'contractType'
     },
     {
