@@ -26,6 +26,7 @@ function NftLazyMinter() {
   const [nftDescription, setNftDescription] = useState();
   const [imageData, setImageData] = useState();
   const [mintedResult, setMintedResult] = useState();
+  const [minting, setMinting] = useState(false);
   const {user} = useMoralis();
   // @ts-ignore
   Moralis.enableWeb3()
@@ -34,6 +35,7 @@ function NftLazyMinter() {
     if (imageData) {
       // @ts-ignore
       const imageFile = new Moralis.File(imageData.name, imageData)
+      setMinting(true);
       await imageFile.saveIPFS();
       // @ts-ignore
       let imageHash = imageFile.hash();
@@ -61,6 +63,7 @@ function NftLazyMinter() {
       })
       console.log(res);
       setMintedResult(res.data.result);
+      setMinting(false);
     } else {
       return null
     }
@@ -93,6 +96,13 @@ function NftLazyMinter() {
   }
 
   return (
+    <>
+      <Row>
+        <h2>Lazy mint NFT on Rarible</h2>
+      </Row>
+      <Row>
+        <h3>ERC-721 Ethereum Rinkeby</h3>
+      </Row>
     <Row>
       <Col span={10} xs={24}>
         <Form {...layout} style={{marginTop: "2rem"}}>
@@ -129,20 +139,20 @@ function NftLazyMinter() {
               customRequest={dummyRequest}
               maxCount={1}
             >
-              <Button icon={<UploadOutlined/>}>Click to Upload</Button>
+             <Button icon={<UploadOutlined/>}>Click to Upload</Button>
             </Upload>
           </Form.Item>
 
           <Form.Item>
-            <Button type={"primary"} onClick={handleSubmit}>
+            { minting ? "minting..." :
+              <Button type={"primary"} onClick={handleSubmit} disabled={ !(nftName && nftDescription && imageData) }>
               Submit
-            </Button>
+            </Button>}
           </Form.Item>
         </Form>
       </Col>
     </Row>
-
-
+    </>
   )
 }
 

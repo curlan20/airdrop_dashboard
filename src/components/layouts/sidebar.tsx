@@ -3,6 +3,8 @@ import {Menu} from 'antd';
 import {
   AimOutlined,
   BarsOutlined,
+  PictureOutlined,
+  PlusSquareOutlined,
   CloseSquareOutlined,
 } from '@ant-design/icons';
 import {useHistory} from 'react-router';
@@ -41,11 +43,11 @@ const SideNav = () => {
           <span>Tokens</span>
         </Menu.Item>
         <Menu.Item key="2" onClick={handleNftsClick}>
-          <BarsOutlined />
+          <PictureOutlined />
           <span>NFTs</span>
         </Menu.Item>
         <Menu.Item key="3" onClick={handleMintNFTClick}>
-          <BarsOutlined />
+          <PlusSquareOutlined />
           <span>Mint NFT</span>
         </Menu.Item>
         <Menu.Item key="4" onClick={handleAirdropClick}>
